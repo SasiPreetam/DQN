@@ -16,7 +16,7 @@ scaler = MinMaxScaler()
 num_cols = df.select_dtypes(include=['int64', 'float64']).columns
 df[num_cols] = scaler.fit_transform(df[num_cols])
 
-print("✅ Preprocessing done on full dataset")
+print(" Preprocessing done on full dataset")
 
 # ========== Sample Realistic Subset ==========
 df_majority = df[df.is_fraud == 0].sample(n=10000, random_state=42)
@@ -84,7 +84,7 @@ epsilon_min = 0.01
 epsilon_decay = 0.99
 batch_size = 32
 memory = deque(maxlen=5000)
-episodes = 5  # ✅ Reduce for speed
+episodes = 5  # Reduce for speed
 reward_per_episode = []
 
 for episode in range(1, episodes + 1):
@@ -111,7 +111,7 @@ for episode in range(1, episodes + 1):
 
     epsilon = max(epsilon * epsilon_decay, epsilon_min)
     reward_per_episode.append(total_reward)
-    print(f"✅ Episode {episode} | Reward: {total_reward} | Epsilon: {epsilon:.3f}")
+    print(f" Episode {episode} | Reward: {total_reward} | Epsilon: {epsilon:.3f}")
 
 # Save Model
 os.makedirs("saved_model", exist_ok=True)
@@ -133,7 +133,7 @@ while True:
         break
 
 from sklearn.metrics import classification_report, confusion_matrix, accuracy_score
-print("\n✅ DQN Evaluation (realistic subset):")
+print("\n DQN Evaluation (realistic subset):")
 print(confusion_matrix(y_true, y_pred))
 print(classification_report(y_true, y_pred))
 print(f"Accuracy: {accuracy_score(y_true, y_pred):.4f}")
@@ -143,12 +143,12 @@ print(f"Accuracy: {accuracy_score(y_true, y_pred):.4f}")
 
 '''
  Episode 1 | Reward: 34 | Epsilon: 0.990
-✅ Episode 2 | Reward: 76 | Epsilon: 0.980
-✅ Episode 3 | Reward: -100 | Epsilon: 0.970
-✅ Episode 4 | Reward: -46 | Epsilon: 0.961
-✅ Episode 5 | Reward: 122 | Epsilon: 0.951
+ Episode 2 | Reward: 76 | Epsilon: 0.980
+ Episode 3 | Reward: -100 | Epsilon: 0.970
+ Episode 4 | Reward: -46 | Epsilon: 0.961
+ Episode 5 | Reward: 122 | Epsilon: 0.951
 
-✅ DQN Evaluation (realistic subset):
+ DQN Evaluation (realistic subset):
 [[   0 2000]
  [   0 2000]]
 
