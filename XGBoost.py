@@ -25,7 +25,7 @@ scaler = MinMaxScaler()
 num_cols = train_df.select_dtypes(include=['int64', 'float64']).columns
 train_df[num_cols] = scaler.fit_transform(train_df[num_cols])
 
-print('✅ Preprocessing Done')
+print(' Preprocessing Done')
 
 # =================== Split & Apply SMOTE ===================
 X = train_df.drop('is_fraud', axis=1)
@@ -38,7 +38,7 @@ X_train, X_test, y_train, y_test = train_test_split(X, y, test_size=0.2, stratif
 smote = SMOTE(random_state=42)
 X_train_res, y_train_res = smote.fit_resample(X_train, y_train)
 
-print(f"✅ After SMOTE: Train = {np.bincount(y_train_res)}, Test = {np.bincount(y_test)}")
+print(f" After SMOTE: Train = {np.bincount(y_train_res)}, Test = {np.bincount(y_test)}")
 
 # =================== Train XGBoost =========================
 xgb_model = xgb.XGBClassifier(
@@ -53,7 +53,7 @@ xgb_model.fit(X_train_res, y_train_res)
 # =================== Evaluate ==============================
 y_pred = xgb_model.predict(X_test)
 
-print("\n✅ XGBoost Model Evaluation:")
+print("\n XGBoost Model Evaluation:")
 print(confusion_matrix(y_test, y_pred))
 print(classification_report(y_test, y_pred))
 print(f"Accuracy: {accuracy_score(y_test, y_pred):.4f}")
@@ -69,11 +69,11 @@ plt.show()
 #output
 
 '''
-✅ Preprocessing Done
+ Preprocessing Done
 
-✅ After SMOTE: Train = [1031335 1031335], Test = [257834   1501]
+ After SMOTE: Train = [1031335 1031335], Test = [257834   1501]
 
-✅ XGBoost Model Evaluation:
+ XGBoost Model Evaluation:
 [[255414   2420]
  [   284   1217]]
               precision    recall  f1-score   support
